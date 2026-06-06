@@ -17,4 +17,3 @@
         <div class="rounded-4 overflow-hidden"
              style="height:360px;background:linear-gradient(135 **...**
 
-_This response is too long to display in full._

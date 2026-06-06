@@ -72,7 +72,18 @@
                         <?= number_format((float)$v['prix'], 2, ',', ' ') ?> €
                         <small class="text-muted fw-normal fs-6">/jour</small>
                     </span>
-                    <a href="/vehicle/detail?id=<?= $v['Id_vehicules'] ?>" class="btn btn-sm btn-danger">Voir</a>
+                    <button
+    type="button"
+    class="btn btn-primary"
+    data-bs-toggle="modal"
+    data-bs-target="#reservationModal"
+    data-id="<?= $v['Id_vehicules'] ?>"
+    data-marque="<?= htmlspecialchars($v['marque']) ?>"
+    data-model="<?= htmlspecialchars($v['model']) ?>"
+    data-prix="<?= $v['prix'] ?>"
+>
+    Voir
+</button>
                 </div>
             </div>
         </div>
@@ -107,3 +118,62 @@
 <?php endif; ?>
 
 <?php require ROOT . '/views/layouts/footer.php'; ?>
+
+<div class="modal fade" id="reservationModal" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title">Réserver un véhicule</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body">
+
+        <p id="vehicule-info" class="fw-bold mb-3"></p>
+
+        <form method="POST" action="/vehicle/reservation">
+
+            <input type="hidden" name="Id_vehicules" id="vehicule-id">
+
+            <div class="row g-3">
+
+                <div class="col-md-6">
+                    <input type="text" name="nom" class="form-control" placeholder="Nom" required>
+                </div>
+
+                <div class="col-md-6">
+                    <input type="text" name="prenom" class="form-control" placeholder="Prénom" required>
+                </div>
+
+                <div class="col-md-6">
+                    <input type="email" name="email" class="form-control" placeholder="Email" required>
+                </div>
+
+                <div class="col-md-6">
+                    <input type="tel" name="telephone" class="form-control" placeholder="Téléphone">
+                </div>
+
+                <div class="col-md-6">
+                    <label>Date début</label>
+                    <input type="date" name="date_debut" class="form-control" required>
+                </div>
+
+                <div class="col-md-6">
+                    <label>Date fin</label>
+                    <input type="date" name="date_fin" class="form-control" required>
+                </div>
+
+            </div>
+
+            <button class="btn btn-success w-100 mt-3">
+                Réserver
+            </button>
+
+        </form>
+
+      </div>
+
+    </div>
+  </div>
+</div>
