@@ -53,9 +53,15 @@
     <div class="col-sm-6 col-lg-4 col-xl-3">
         <div class="card h-100" style="border-radius:12px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.07)">
             <!-- Placeholder image -->
-            <div style="height:180px;background:linear-gradient(135deg,#1a1a2e,#0f3460);display:flex;align-items:center;justify-content:center">
-                <i class="bi bi-car-front-fill text-white" style="font-size:4rem;opacity:.3"></i>
-            </div>
+            <div style="height:180px;overflow:hidden;background:#eee;display:flex;align-items:center;justify-content:center">
+    <?php if (!empty($v['image'])): ?>
+        <img src="/<?= htmlspecialchars($v['image']) ?>"
+             alt="<?= htmlspecialchars($v['marque']) ?>"
+             style="width:100%;height:100%;object-fit:cover;">
+    <?php else: ?>
+        <i class="bi bi-car-front-fill text-secondary" style="font-size:4rem;opacity:.3"></i>
+    <?php endif; ?>
+</div>
             <div class="card-body d-flex flex-column">
                 <?php if (!empty($v['nom_categorie'])): ?>
                     <span class="badge bg-secondary mb-2" style="width:fit-content"><?= htmlspecialchars($v['nom_categorie']) ?></span>
