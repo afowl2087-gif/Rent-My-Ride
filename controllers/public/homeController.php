@@ -1,6 +1,6 @@
 <?php
-require_once ROOT . '/models/vehicle.php';
-require_once ROOT . '/models/category.php';
+require_once __DIR__ . '/../../models/vehicle.php';
+require_once __DIR__ . '/../../models/category.php';
 
 $perPage    = 10;
 $page       = max(1, (int) ($_GET['page'] ?? 1));
@@ -16,4 +16,4 @@ $vehicles   = $vehicle->getAllAvailable($categoryId, $search ?: null, $page, $pe
 $categories = (new Category())->getAll();
 
 $pageTitle = 'Véhicules disponibles';
-require ROOT . '/views/home-cards.php';
+require __DIR__ . '/../../views/home-cards.php';

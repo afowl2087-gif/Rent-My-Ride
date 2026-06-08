@@ -1,5 +1,5 @@
 <?php
-require_once ROOT . '/models/category.php';
+require_once __DIR__. '/../../../models/category.php';
 
 $id       = (int) ($_GET['id'] ?? 0);
 $category = new Category();
@@ -31,4 +31,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 $pageTitle = 'Modifier la catégorie';
-require ROOT . '/views/dashboard/categories/update.php';
+require __DIR__ . '/../../../views/dashboard/categories/update.php';

@@ -1,8 +1,8 @@
-<?php require ROOT . '/views/layouts/dashboard-header.php'; ?>
+<?php require __DIR__ . '/../../../views/layouts/dashboard-header.php'; ?>
 
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h1 class="h3 mb-0">Ajouter une catégorie</h1>
-    <a href="/dashboard/categories/list" class="btn btn-outline-secondary">
+    <a href="/../dashboard/categories/list" class="btn btn-outline-secondary">
         <i class="bi bi-arrow-left"></i> Retour
     </a>
 </div>
@@ -35,7 +35,7 @@
                 <button type="submit" class="btn btn-primary">
                     <i class="bi bi-check-lg"></i> Ajouter
                 </button>
-                <a href="/dashboard/categories/list" class="btn btn-outline-secondary">
+                <a href="/../dashboard/categories/list" class="btn btn-outline-secondary">
                     Annuler
                 </a>
             </div>
@@ -43,4 +43,4 @@
     </div>
 </div>
 
-<?php require ROOT . '/views/layouts/dashboard-footer.php'; ?>
+<?php require __DIR__. '/../../../views/layouts/dashboard-footer.php'; ?>

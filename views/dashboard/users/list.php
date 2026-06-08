@@ -1,4 +1,4 @@
-<?php require ROOT . '/views/layouts/dashboard-header.php'; ?>
+<?php require __DIR__ . '/../../../views/layouts/dashboard-header.php'; ?>
 
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h1 class="h3 mb-0">Utilisateurs</h1>
@@ -62,4 +62,4 @@
     </div>
 <?php endif; ?>
 
-<?php require ROOT . '/views/layouts/dashboard-footer.php'; ?>
+<?php require __DIR__ . '/../../../views/layouts/dashboard-footer.php'; ?>

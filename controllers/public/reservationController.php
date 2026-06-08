@@ -1,7 +1,7 @@
 <?php
-require_once ROOT . '/models/vehicle.php';
-require_once ROOT . '/models/user.php';
-require_once ROOT . '/models/reservation.php';
+require_once  __DIR__. '/../../models/vehicle.php';
+require_once __DIR__ . '/../../models/user.php';
+require_once __DIR__ . '/../../models/reservation.php';
 
 $id      = (int) ($_GET['id'] ?? 0);
 $vehicle = (new Vehicle())->findById($id);
@@ -82,4 +82,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 $pageTitle = 'Réserver – ' . $vehicle['marque'] . ' ' . $vehicle['model'];
-require ROOT . '/views/formulaire-reservation.php';
+require __DIR__ . '/../../views/formulaire-reservation.php';

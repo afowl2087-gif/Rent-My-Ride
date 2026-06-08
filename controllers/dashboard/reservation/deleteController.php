@@ -1,5 +1,5 @@
 <?php
-require_once ROOT . '/models/reservation.php';
+require_once __DIR__ . '/../../../models/reservation.php';
 
 $id = (int) ($_GET['id'] ?? 0);
 if ($id) {

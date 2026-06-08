@@ -1,7 +1,7 @@
 <?php
-require_once ROOT . '/models/reservation.php';
-require_once ROOT . '/models/vehicle.php';
-require_once ROOT . '/models/user.php';
+require_once __DIR__ . '/../../../models/reservation.php';
+require_once __DIR__ . '/../../../models/vehicle.php';
+require_once __DIR__ . '/../../../models/user.php';
 
 $id          = (int) ($_GET['id'] ?? 0);
 $reservation = new Reservation();
@@ -60,4 +60,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 $pageTitle = 'Modifier la réservation';
-require ROOT . '/views/dashboard/reservation/update.php';
+require __DIR__ . '/../../../views/dashboard/reservation/update.php';

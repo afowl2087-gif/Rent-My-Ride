@@ -1,4 +1,4 @@
-<?php require ROOT . '/views/layouts/dashboard-header.php'; ?>
+<?php require __DIR__ . '/../../../views/layouts/dashboard-header.php'; ?>
 
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h1 class="h3 mb-0">Modifier l'utilisateur</h1>
@@ -59,4 +59,4 @@
     </div>
 </div>
 
-<?php require ROOT . '/views/layouts/dashboard-footer.php'; ?>
+<?php require __DIR__ . '/../../../views/layouts/dashboard-footer.php'; ?>

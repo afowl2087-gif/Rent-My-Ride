@@ -1,4 +1,4 @@
-<?php require ROOT . '/views/layouts/header.php'; ?>
+<?php require __DIR__ . '/../views/layouts/header.php'; ?>
 
 <?php if (!empty($_SESSION['flash'])): ?>
     <div class="alert alert-<?= $_SESSION['flash']['type'] === 'success' ? 'success' : 'warning' ?> alert-dismissible fade show">

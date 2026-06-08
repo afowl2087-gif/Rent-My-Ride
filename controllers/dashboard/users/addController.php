@@ -1,5 +1,5 @@
 <?php
-require_once ROOT . '/models/user.php';
+require_once __DIR__ . '/../../../models/user.php';
 
 $errors = [];
 $data   = [
@@ -52,4 +52,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 $pageTitle = 'Ajouter un utilisateur';
-require ROOT . '/views/dashboard/users/add-form.php';
+require __DIR__ . '/../../../views/dashboard/users/add-form.php';

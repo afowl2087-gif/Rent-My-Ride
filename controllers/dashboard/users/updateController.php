@@ -1,5 +1,5 @@
 <?php
-require_once ROOT . '/models/user.php';
+require_once __DIR__ . '/../../../models/user.php';
 
 $id   = (int) ($_GET['id'] ?? 0);
 $user = new User();
@@ -54,4 +54,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 $pageTitle = 'Modifier l\'utilisateur';
-require ROOT . '/views/dashboard/users/update.php';
+require __DIR__ . '/../../../views/dashboard/users/update.php';

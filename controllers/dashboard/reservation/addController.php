@@ -1,7 +1,7 @@
 <?php
-require_once ROOT . '/models/reservation.php';
-require_once ROOT . '/models/vehicle.php';
-require_once ROOT . '/models/user.php';
+require_once __DIR__ . '/../../../models/reservation.php';
+require_once __DIR__ . '/../../../models/vehicle.php';
+require_once __DIR__ . '/../../../models/user.php';
 
 $vehicles = (new Vehicle())->getAll();
 $users    = (new User())->getAll();
@@ -52,4 +52,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 $pageTitle = 'Ajouter une réservation';
-require ROOT . '/views/dashboard/reservation/add-form.php';
+require __DIR__ . '/../../../views/dashboard/reservation/add-form.php';

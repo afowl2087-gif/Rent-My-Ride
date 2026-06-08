@@ -1,5 +1,5 @@
 <?php
-require_once ROOT . '/models/category.php';
+require_once __DIR__ . '/../../../models/category.php';
 
 $errors = [];
 $nom    = '';
@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $category->setName($nom);
             if ($category->insert()) {
                 $_SESSION['flash'] = ['type' => 'success', 'msg' => 'Catégorie ajoutée avec succès.'];
-                header('Location: /dashboard/categories/list');
+                header('Location: /controllers/dashboard/categories/listController');
                 exit;
             }
             $errors[] = "Erreur lors de l'ajout.";
@@ -26,4 +26,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 $pageTitle = 'Ajouter une catégorie';
-require ROOT . '/views/dashboard/categories/add-form.php';
+require __DIR__ . '/../../../views/dashboard/categories/add-form.php';

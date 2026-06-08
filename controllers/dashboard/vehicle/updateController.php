@@ -1,6 +1,6 @@
 <?php
-require_once ROOT . '/models/vehicle.php';
-require_once ROOT . '/models/category.php';
+require_once __DIR__ . '/../../../models/vehicle.php';
+require_once __DIR__ . '/../../../models/category.php';
 
 $id      = (int) ($_GET['id'] ?? 0);
 $vehicle = new Vehicle();
@@ -43,4 +43,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 $pageTitle = 'Modifier le véhicule';
-require ROOT . '/views/dashboard/vehicle/update.php';
+require __DIR__ . '/../../../views/dashboard/vehicle/update.php';

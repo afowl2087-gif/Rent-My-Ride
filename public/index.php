@@ -12,7 +12,7 @@ if (php_sapi_name() === 'cli-server') {
 
 define('ROOT', dirname(__DIR__));
 
-require_once ROOT . '/config/database.php';
+require_once __DIR__ . '/../config/database.php';
 
 // Singleton PDO accessible partout via getDB()
 function getDB(): PDO {
@@ -30,12 +30,12 @@ $uri      = rtrim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
 $segments = array_values(array_filter(explode('/', $uri)));
 
 if (empty($segments)) {
-    require ROOT . '/controllers/public/homeController.php';
+    require __DIR__ . '/../controllers/public/homeController.php';
 
 } elseif ($segments[0] === 'dashboard') {
     $section = $segments[1] ?? 'categories';
     $action  = $segments[2] ?? 'list';
-    $ctrl    = ROOT . "/controllers/dashboard/{$section}/{$action}Controller.php";
+    $ctrl    = __DIR__ . "/../controllers/dashboard/{$section}/{$action}Controller.php";
     if (file_exists($ctrl)) {
         require $ctrl;
     } else {
@@ -45,7 +45,7 @@ if (empty($segments)) {
 
 } elseif ($segments[0] === 'vehicle') {
     $action = $segments[1] ?? 'detail';
-    $ctrl   = ROOT . "/controllers/public/{$action}Controller.php";
+    $ctrl   = __DIR__ . "/../controllers/public/{$action}Controller.php";
     if (file_exists($ctrl)) {
         require $ctrl;
     } else {
@@ -54,7 +54,7 @@ if (empty($segments)) {
     }
 
 } else {
-    $ctrl = ROOT . "/controllers/public/{$segments[0]}Controller.php";
+    $ctrl = __DIR__ . "/../controllers/public/{$segments[0]}Controller.php";
     if (file_exists($ctrl)) {
         require $ctrl;
     } else {

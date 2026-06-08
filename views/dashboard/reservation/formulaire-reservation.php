@@ -1,4 +1,4 @@
-<?php require ROOT . '/views/layouts/header.php'; ?>
+<?php require __DIR__ . '/../../../views/layouts/header.php'; ?>
 
 <div class="container py-5" style="max-width: 700px;">
 
@@ -108,4 +108,4 @@ inDebut.addEventListener('change', calculer);
 inFin.addEventListener('change', calculer);
 </script>
 
-<?php require ROOT . '/views/layouts/footer.php'; ?>
+<?php require __DIR__ . '/../../../views/layouts/footer.php'; ?>

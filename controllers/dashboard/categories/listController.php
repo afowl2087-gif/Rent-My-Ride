@@ -1,8 +1,8 @@
 <?php
-require_once ROOT . '/models/category.php';
+require_once __DIR__ . '/../../../models/category.php';
 
 $category   = new Category();
 $categories = $category->getAll();
 
 $pageTitle = 'Catégories';
-require ROOT . '/views/dashboard/categories/list-categories.php';
+require __DIR__ . '/../../../views/dashboard/categories/list-categories.php';

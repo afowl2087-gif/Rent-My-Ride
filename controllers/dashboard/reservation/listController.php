@@ -1,5 +1,5 @@
 <?php
-require_once ROOT . '/models/reservation.php';
+require_once __DIR__ . '/../../../models/reservation.php';
 
 $reservation  = new Reservation();
 $reservations = $reservation->getAll();
@@ -17,4 +17,4 @@ if (isset($_GET['statut'], $_GET['id']) && is_numeric($_GET['id'])) {
 }
 
 $pageTitle = 'Réservations';
-require ROOT . '/views/dashboard/reservation/list-reservation.php';
+require __DIR__ . '/../../../views/dashboard/reservation/list-reservation.php';

@@ -1,6 +1,6 @@
 <?php
-require_once ROOT . '/models/vehicle.php';
-require_once ROOT . '/models/category.php';
+require_once __DIR__ . '/../../../models/vehicle.php';
+require_once __DIR__ . '/../../../models/category.php';
 
 $errors     = [];
 $categories = (new Category())->getAll();
@@ -36,4 +36,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 $pageTitle = 'Ajouter un véhicule';
-require ROOT . '/views/dashboard/vehicle/add-form.php';
+require __DIR__ . '/../../../views/dashboard/vehicle/add-form.php';

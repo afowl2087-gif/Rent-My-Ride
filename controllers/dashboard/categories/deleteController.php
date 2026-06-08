@@ -1,5 +1,5 @@
 <?php
-require_once ROOT . '/models/category.php';
+require_once __DIR__ . '/../../../models/category.php';
 
 $id = (int) ($_GET['id'] ?? 0);
 if ($id) {
@@ -7,5 +7,5 @@ if ($id) {
     $category->delete($id);
     $_SESSION['flash'] = ['type' => 'warning', 'msg' => 'Catégorie supprimée.'];
 }
-header('Location: /dashboard/categories/list');
+header('Location: controllers/dashboard/categories/listController');
 exit;

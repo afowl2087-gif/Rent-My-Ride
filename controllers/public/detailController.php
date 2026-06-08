@@ -1,5 +1,5 @@
 <?php
-require_once ROOT . '/models/vehicle.php';
+require_once __DIR__ . '/../../models/vehicle.php';
 
 $id      = (int) ($_GET['id'] ?? 0);
 $vehicle = (new Vehicle())->findById($id);
@@ -10,4 +10,4 @@ if (!$id || !$vehicle) {
 }
 
 $pageTitle = $vehicle['marque'] . ' ' . $vehicle['model'];
-require ROOT . '/views/detail.php';
+require __DIR__ . '/../../views/detail.php';
