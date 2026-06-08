@@ -4,83 +4,62 @@ require_once __DIR__ . '/../config/database.php';
 
 class Category
 {
-    private $pdo;
-
-    private $Id_categories;
-    private $nom_categorie;
+    private PDO $pdo;
 
     public function __construct()
     {
-        $db = new Database();
-        $this->pdo = $db->getConnection();
+        $this->pdo = (new Database())->getConnection();
     }
 
-    // GETTERS
-    public function getId()
+    public function getAll(): array
     {
-        return $this->Id_categories;
+        return $this->pdo->query("SELECT * FROM categories ORDER BY nom_categorie")->fetchAll();
     }
 
-    public function getName()
+    public function findById(int $id): array|false
     {
-        return $this->nom_categorie;
+        $stmt = $this->pdo->prepare("SELECT * FROM categories WHERE Id_categories = :id");
+        $stmt->execute(['id' => $id]);
+        return $stmt->fetch();
     }
 
-    // SETTERS
-    public function setName($name)
+    public function insert(string $nom): bool
     {
-        $this->nom_categorie = $name;
+        $stmt = $this->pdo->prepare("INSERT INTO categories (nom_categorie) VALUES (:nom)");
+        return $stmt->execute(['nom' => $nom]);
     }
 
-    // INSERT
-    public function insert()
+    public function update(int $id, string $nom): bool
     {
-        $sql = "INSERT INTO categories (nom_categorie) VALUES (:name)";
-        $stmt = $this->pdo->prepare($sql);
-
-        return $stmt->execute([
-            'name' => $this->nom_categorie
-        ]);
+        $stmt = $this->pdo->prepare(
+            "UPDATE categories SET nom_categorie = :nom WHERE Id_categories = :id"
+        );
+        return $stmt->execute(['id' => $id, 'nom' => $nom]);
     }
 
-    // GET ALL
-    public function getAll()
+    public function delete(int $id): bool
     {
-        $sql = "SELECT * FROM categories";
-        $stmt = $this->pdo->query($sql);
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $stmt = $this->pdo->prepare("DELETE FROM categories WHERE Id_categories = :id");
+        return $stmt->execute(['id' => $id]);
     }
 
-    // UPDATE
-    public function update($id, $name)
+    /**
+     * Vérifie si un nom existe déjà, en excluant optionnellement un id (pour le update).
+     */
+    public function isExist(string $nom, ?int $excludeId = null): bool
     {
-        $sql = "UPDATE categories SET nom_categorie = :name WHERE Id_categories = :id";
-        $stmt = $this->pdo->prepare($sql);
-
-        return $stmt->execute([
-            'id' => $id,
-            'name' => $name
-        ]);
-    }
-
-    // DELETE
-    public function delete($id)
-    {
-        $sql = "DELETE FROM categories WHERE Id_categories = :id";
-        $stmt = $this->pdo->prepare($sql);
-
-        return $stmt->execute([
-            'id' => $id
-        ]);
-    }
-
-    // IS EXIST (bonus)
-    public function isExist($name)
-    {
-        $sql = "SELECT * FROM categories WHERE nom_categorie = :name";
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->execute(['name' => $name]);
-
+        if ($excludeId !== null) {
+            $stmt = $this->pdo->prepare(
+                "SELECT Id_categories FROM categories
+                 WHERE nom_categorie = :nom AND Id_categories != :id"
+            );
+            $stmt->execute(['nom' => $nom, 'id' => $excludeId]);
+        } else {
+            $stmt = $this->pdo->prepare(
+                "SELECT Id_categories FROM categories WHERE nom_categorie = :nom"
+            );
+            $stmt->execute(['nom' => $nom]);
+        }
         return $stmt->rowCount() > 0;
     }
 }

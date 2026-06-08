@@ -2,30 +2,24 @@
 
 class Database
 {
-    private $host = "localhost";
-    private $db_name = "RentMyRide";
-    private $username = "root";
-    private $password = "";
+    private string $host     = 'localhost';
+    private string $db_name  = 'rentmyride';
+    private string $username = 'root';
+    private string $password = '';
 
-    public $pdo;
-
-    public function getConnection()
+    public function getConnection(): PDO
     {
-        $this->pdo = null;
-
         try {
-            $this->pdo = new PDO(
-                "mysql:host={$this->host};dbname={$this->db_name};charset=utf8",
+            $pdo = new PDO(
+                "mysql:host={$this->host};dbname={$this->db_name};charset=utf8mb4",
                 $this->username,
                 $this->password
             );
-
-            $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
+            $pdo->setAttribute(PDO::ATTR_ERRMODE,        PDO::ERRMODE_EXCEPTION);
+            $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+            return $pdo;
         } catch (PDOException $e) {
-            die("Erreur connexion DB : " . $e->getMessage());
+            die('Erreur connexion DB : ' . $e->getMessage());
         }
-
-        return $this->pdo;
     }
 }

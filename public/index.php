@@ -1,10 +1,9 @@
 <?php
 declare(strict_types=1);
-ini_set('display_errors', 1);
+ini_set('display_errors', '1');
 error_reporting(E_ALL);
-// ... reste du fichier
 
-// Servir les fichiers statiques (images, css, js)
+// Servir les fichiers statiques (images, css, js) avec le serveur CLI PHP
 if (php_sapi_name() === 'cli-server') {
     $file = __DIR__ . parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
     if (is_file($file)) return false;
@@ -15,11 +14,11 @@ define('ROOT', dirname(__DIR__));
 require_once __DIR__ . '/../config/database.php';
 
 // Singleton PDO accessible partout via getDB()
-function getDB(): PDO {
+function getDB(): PDO
+{
     static $pdo = null;
     if ($pdo === null) {
-        $db  = new Database();
-        $pdo = $db->getConnection();
+        $pdo = (new Database())->getConnection();
     }
     return $pdo;
 }

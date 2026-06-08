@@ -17,11 +17,11 @@ $users    = (new User())->getAll();
 $errors   = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $data['Id_vehicules'] = (int) ($_POST['Id_vehicules'] ?? 0);
-    $data['Id_users']     = (int) ($_POST['Id_users']     ?? 0);
-    $data['date_debut']   = trim($_POST['date_debut']     ?? '');
-    $data['date_fin']     = trim($_POST['date_fin']       ?? '');
-    $data['statut']       = trim($_POST['statut']         ?? 'en attente');
+    $data['Id_vehicules'] = (int)   ($_POST['Id_vehicules'] ?? 0);
+    $data['Id_users']     = (int)   ($_POST['Id_users']     ?? 0);
+    $data['date_debut']   = trim($_POST['date_debut']       ?? '');
+    $data['date_fin']     = trim($_POST['date_fin']         ?? '');
+    $data['statut']       = trim($_POST['statut']           ?? 'en attente');
 
     if (empty($data['Id_vehicules'])) $errors[] = 'Veuillez sélectionner un véhicule.';
     if (empty($data['Id_users']))     $errors[] = 'Veuillez sélectionner un client.';
@@ -37,7 +37,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if (empty($errors)) {
-        $stmt = (new Database())->getConnection()->prepare(
+        // Mise à jour via le modèle Reservation (updateStatut étendu ici inline
+        // car le modèle n'a pas de méthode update complète)
+        $pdo  = (new Database())->getConnection();
+        $stmt = $pdo->prepare(
             "UPDATE reservations
              SET date_debut=:debut, date_fin=:fin, statut=:statut,
                  Id_vehicules=:vid, Id_users=:uid

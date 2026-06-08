@@ -7,19 +7,19 @@ $vehicles = (new Vehicle())->getAll();
 $users    = (new User())->getAll();
 $errors   = [];
 $data     = [
-    'Id_vehicules' => '',
-    'Id_users'     => '',
+    'Id_vehicules' => 0,
+    'Id_users'     => 0,
     'date_debut'   => '',
     'date_fin'     => '',
     'statut'       => 'en attente',
 ];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $data['Id_vehicules'] = (int) ($_POST['Id_vehicules'] ?? 0);
-    $data['Id_users']     = (int) ($_POST['Id_users']     ?? 0);
-    $data['date_debut']   = trim($_POST['date_debut']     ?? '');
-    $data['date_fin']     = trim($_POST['date_fin']       ?? '');
-    $data['statut']       = trim($_POST['statut']         ?? 'en attente');
+    $data['Id_vehicules'] = (int)   ($_POST['Id_vehicules'] ?? 0);
+    $data['Id_users']     = (int)   ($_POST['Id_users']     ?? 0);
+    $data['date_debut']   = trim($_POST['date_debut']       ?? '');
+    $data['date_fin']     = trim($_POST['date_fin']         ?? '');
+    $data['statut']       = trim($_POST['statut']           ?? 'en attente');
 
     if (empty($data['Id_vehicules'])) $errors[] = 'Veuillez sélectionner un véhicule.';
     if (empty($data['Id_users']))     $errors[] = 'Veuillez sélectionner un client.';
@@ -35,8 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if (empty($errors)) {
-        $reservation = new Reservation();
-        if ($reservation->insert(
+        if ((new Reservation())->insert(
             $data['date_debut'],
             $data['date_fin'],
             $data['statut'],

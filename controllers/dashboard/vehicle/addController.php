@@ -2,16 +2,24 @@
 require_once __DIR__ . '/../../../models/vehicle.php';
 require_once __DIR__ . '/../../../models/category.php';
 
-$errors     = [];
 $categories = (new Category())->getAll();
-$data = ['marque'=>'','model'=>'','description'=>'','nom'=>'','prix'=>'','disponibilite'=>1,'Id_categories'=>''];
+$errors     = [];
+$data       = [
+    'marque'        => '',
+    'model'         => '',
+    'description'   => '',
+    'nom'           => '',
+    'prix'          => '',
+    'disponibilite' => 1,
+    'Id_categories' => '',
+];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $data['marque']        = trim($_POST['marque'] ?? '');
-    $data['model']         = trim($_POST['model'] ?? '');
-    $data['description']   = trim($_POST['description'] ?? '');
-    $data['nom']           = trim($_POST['nom'] ?? '');
-    $data['prix']          = (float) ($_POST['prix'] ?? 0);
+    $data['marque']        = trim($_POST['marque']       ?? '');
+    $data['model']         = trim($_POST['model']        ?? '');
+    $data['description']   = trim($_POST['description']  ?? '');
+    $data['nom']           = trim($_POST['nom']          ?? '');
+    $data['prix']          = (float) ($_POST['prix']     ?? 0);
     $data['disponibilite'] = isset($_POST['disponibilite']) ? 1 : 0;
     $data['Id_categories'] = (int) ($_POST['Id_categories'] ?? 0);
 
@@ -22,10 +30,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($data['Id_categories'])) $errors[] = 'La catégorie est obligatoire.';
 
     if (empty($errors)) {
-        $vehicle = new Vehicle();
-        if ($vehicle->insert(
-            $data['marque'], $data['model'], $data['description'], $data['nom'],
-            $data['prix'], $data['disponibilite'], $data['Id_categories']
+        if ((new Vehicle())->insert(
+            $data['marque'],
+            $data['model'],
+            $data['description'],
+            $data['nom'],
+            $data['prix'],
+            $data['disponibilite'],
+            $data['Id_categories']
         )) {
             $_SESSION['flash'] = ['type' => 'success', 'msg' => 'Véhicule ajouté avec succès.'];
             header('Location: /dashboard/vehicle/list');

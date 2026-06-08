@@ -4,31 +4,26 @@ require_once __DIR__ . '/../config/database.php';
 
 class User
 {
-    private $pdo;
+    private PDO $pdo;
 
     public function __construct()
     {
-        $db = new Database();
-        $this->pdo = $db->getConnection();
+        $this->pdo = (new Database())->getConnection();
     }
 
-    // GET ALL
-    public function getAll()
+    public function getAll(): array
     {
-        $stmt = $this->pdo->query("SELECT * FROM users ORDER BY nom, prenom");
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $this->pdo->query("SELECT * FROM users ORDER BY nom, prenom")->fetchAll();
     }
 
-    // FIND BY ID
-    public function findById($id)
+    public function findById(int $id): array|false
     {
         $stmt = $this->pdo->prepare("SELECT * FROM users WHERE Id_users = :id");
         $stmt->execute(['id' => $id]);
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        return $stmt->fetch();
     }
 
-    // EMAIL EXIST (évite les doublons)
-    public function emailExists($email, $excludeId = null)
+    public function emailExists(string $email, ?int $excludeId = null): bool
     {
         if ($excludeId !== null) {
             $stmt = $this->pdo->prepare(
@@ -36,15 +31,22 @@ class User
             );
             $stmt->execute(['email' => $email, 'id' => $excludeId]);
         } else {
-            $stmt = $this->pdo->prepare("SELECT Id_users FROM users WHERE email = :email");
+            $stmt = $this->pdo->prepare(
+                "SELECT Id_users FROM users WHERE email = :email"
+            );
             $stmt->execute(['email' => $email]);
         }
         return $stmt->rowCount() > 0;
     }
 
-    // INSERT — retourne le nouvel id
-    public function insert($nom, $prenom, $email, $telephone, $mot_de_passe = '', $role = 0)
-    {
+    public function insert(
+        string $nom,
+        string $prenom,
+        string $email,
+        string $telephone,
+        string $mot_de_passe = '',
+        int    $role = 0
+    ): int {
         $stmt = $this->pdo->prepare(
             "INSERT INTO users (nom, prenom, email, telephone, mot_de_passe, role)
              VALUES (:nom, :prenom, :email, :tel, :mdp, :role)"
@@ -60,12 +62,18 @@ class User
         return (int) $this->pdo->lastInsertId();
     }
 
-    // UPDATE
-    public function update($id, $nom, $prenom, $email, $telephone, $role)
-    {
+    public function update(
+        int    $id,
+        string $nom,
+        string $prenom,
+        string $email,
+        string $telephone,
+        int    $role
+    ): bool {
         $stmt = $this->pdo->prepare(
-            "UPDATE users SET nom=:nom, prenom=:prenom, email=:email,
-             telephone=:tel, role=:role WHERE Id_users=:id"
+            "UPDATE users
+             SET nom=:nom, prenom=:prenom, email=:email, telephone=:tel, role=:role
+             WHERE Id_users=:id"
         );
         return $stmt->execute([
             'id'     => $id,
@@ -77,8 +85,7 @@ class User
         ]);
     }
 
-    // DELETE
-    public function delete($id)
+    public function delete(int $id): bool
     {
         $stmt = $this->pdo->prepare("DELETE FROM users WHERE Id_users = :id");
         return $stmt->execute(['id' => $id]);

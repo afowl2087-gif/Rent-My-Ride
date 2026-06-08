@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__. '/../../../models/category.php';
+require_once __DIR__ . '/../../../models/category.php';
 
 $id       = (int) ($_GET['id'] ?? 0);
 $category = new Category();

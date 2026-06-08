@@ -15,11 +15,11 @@ $categories = (new Category())->getAll();
 $errors     = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $data['marque']        = trim($_POST['marque'] ?? '');
-    $data['model']         = trim($_POST['model'] ?? '');
-    $data['description']   = trim($_POST['description'] ?? '');
-    $data['nom']           = trim($_POST['nom'] ?? '');
-    $data['prix']          = (float) ($_POST['prix'] ?? 0);
+    $data['marque']        = trim($_POST['marque']       ?? '');
+    $data['model']         = trim($_POST['model']        ?? '');
+    $data['description']   = trim($_POST['description']  ?? '');
+    $data['nom']           = trim($_POST['nom']          ?? '');
+    $data['prix']          = (float) ($_POST['prix']     ?? 0);
     $data['disponibilite'] = isset($_POST['disponibilite']) ? 1 : 0;
     $data['Id_categories'] = (int) ($_POST['Id_categories'] ?? 0);
 
@@ -31,8 +31,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (empty($errors)) {
         if ($vehicle->update(
-            $id, $data['marque'], $data['model'], $data['description'], $data['nom'],
-            $data['prix'], $data['disponibilite'], $data['Id_categories']
+            $id,
+            $data['marque'],
+            $data['model'],
+            $data['description'],
+            $data['nom'],
+            $data['prix'],
+            $data['disponibilite'],
+            $data['Id_categories']
         )) {
             $_SESSION['flash'] = ['type' => 'success', 'msg' => 'Véhicule mis à jour.'];
             header('Location: /dashboard/vehicle/list');

@@ -53,5 +53,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-$pageTitle = 'Modifier l\'utilisateur';
+$pageTitle = "Modifier l'utilisateur";
 require __DIR__ . '/../../../views/dashboard/users/update.php';
