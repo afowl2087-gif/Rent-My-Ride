@@ -26,4 +26,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 $pageTitle = 'Ajouter une catégorie';
-require ROOT . '/views/dashboard/categories/add-form.php';
+require ROOT . '/../../../views/dashboard/categories/add-form.php';
