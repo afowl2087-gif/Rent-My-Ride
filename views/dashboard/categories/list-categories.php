@@ -2,9 +2,16 @@
 
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h1 class="h3 mb-0">Catégories</h1>
-    <a href="/dashboard/categories/add" class="btn btn-primary">
-        <i class="bi bi-plus-lg"></i> Ajouter
-    </a>
+
+    <div>
+        <a href="/dashboard/categories/archived" class="btn btn-secondary me-2">
+            <i class="bi bi-archive"></i> Catégories archivées
+        </a>
+
+        <a href="/dashboard/categories/add" class="btn btn-primary">
+            <i class="bi bi-plus-lg"></i> Ajouter
+        </a>
+    </div>
 </div>
 
 <?php if (isset($_SESSION['flash'])): ?>
@@ -37,10 +44,10 @@
                            class="btn btn-sm btn-warning">
                             <i class="bi bi-pencil"></i> Modifier
                         </a>
-                        <a href="/dashboard/categories/delete?id=<?= $cat['Id_categories'] ?>"
-                           class="btn btn-sm btn-danger"
-                           onclick="return confirm('Supprimer cette catégorie ?')">
-                            <i class="bi bi-trash"></i> Supprimer
+                        <a href="/dashboard/categories/archive?id=<?= $cat['Id_categories'] ?>"
+                        class="btn btn-sm btn-danger"
+                        onclick="return confirm('Archiver cette catégorie ?')">
+                        <i class="bi bi-archive"></i> Archiver
                         </a>
                     </td>
                 </tr>

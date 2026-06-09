@@ -91,11 +91,11 @@ class Vehicle
     }
 
     // INSERT
-    public function insert($marque, $model, $description, $nom, $prix, $disponibilite, $id_categories)
+    public function insert($marque, $model, $description, $nom, $prix, $disponibilite, $id_categories, $image = null)
     {
         $stmt = $this->pdo->prepare(
-            "INSERT INTO vehicules (marque, model, description, nom, prix, disponibilite, Id_categories)
-             VALUES (:marque, :model, :description, :nom, :prix, :dispo, :cat)"
+            "INSERT INTO vehicules (marque, model, description, nom, prix, disponibilite, Id_categories, image)
+             VALUES (:marque, :model, :description, :nom, :prix, :dispo, :cat, :image)"
         );
         return $stmt->execute([
             'marque'       => $marque,
@@ -105,6 +105,7 @@ class Vehicle
             'prix'         => $prix,
             'dispo'        => $disponibilite ? 1 : 0,
             'cat'          => $id_categories,
+            'image'        => $image
         ]);
     }
 

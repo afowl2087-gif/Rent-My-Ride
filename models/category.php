@@ -46,9 +46,9 @@ class Category
     // GET ALL
     public function getAll()
     {
-        $sql = "SELECT * FROM categories";
+        $sql = "SELECT * FROM categories WHERE is_archived = 0";
         $stmt = $this->pdo->query($sql);
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);   
     }
 
     // UPDATE
@@ -63,17 +63,6 @@ class Category
         ]);
     }
 
-    // DELETE
-    public function delete($id)
-    {
-        $sql = "DELETE FROM categories WHERE Id_categories = :id";
-        $stmt = $this->pdo->prepare($sql);
-
-        return $stmt->execute([
-            'id' => $id
-        ]);
-    }
-
     // IS EXIST (bonus)
     public function isExist($name)
     {
@@ -83,4 +72,55 @@ class Category
 
         return $stmt->rowCount() > 0;
     }
+
+    public function archive($id)
+{
+    $stmt = $this->pdo->prepare("
+        UPDATE categories
+        SET is_archived = 1
+        WHERE Id_categories = :id
+    ");
+
+    return $stmt->execute([
+        'id' => $id
+    ]);
+}
+public function findById($id)
+{
+    $stmt = $this->pdo->prepare("
+        SELECT *
+        FROM categories
+        WHERE Id_categories = :id
+        LIMIT 1
+    ");
+
+    $stmt->execute([
+        'id' => $id
+    ]);
+
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
+public function restore($id)
+{
+    $stmt = $this->pdo->prepare("
+        UPDATE categories
+        SET is_archived = 0
+        WHERE Id_categories = :id
+    ");
+
+    return $stmt->execute(['id' => $id]);
+}
+
+public function getArchived()
+{
+    $stmt = $this->pdo->query("
+        SELECT *
+        FROM categories
+        WHERE is_archived = 1
+        ORDER BY nom_categorie ASC
+    ");
+
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
 }

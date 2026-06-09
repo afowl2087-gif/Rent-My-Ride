@@ -19,8 +19,15 @@
 
 <div class="card shadow-sm" style="max-width: 700px;">
     <div class="card-body">
-        <form method="POST" action="">
+        <form method="POST" enctype="multipart/form-data">
             <div class="row g-3">
+                <div class="col-12">
+    <label class="form-label">Photo du véhicule</label>
+    <input type="file"
+           name="image"
+           class="form-control"
+           accept=".jpg,.jpeg,.png,.webp">
+</div>
                 <div class="col-md-6">
                     <label class="form-label">Marque</label>
                     <input type="text" name="marque" class="form-control"

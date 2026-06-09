@@ -21,11 +21,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($data['prix'] <= 0)            $errors[] = 'Le prix doit être supérieur à 0.';
     if (empty($data['Id_categories'])) $errors[] = 'La catégorie est obligatoire.';
 
+    $imagePath = null;
+
+if (!empty($_FILES['image']['name'])) {
+
+    $uploadDir = ROOT . '/public/uploads/vehicles/';
+
+    if (!is_dir($uploadDir)) {
+        mkdir($uploadDir, 0777, true);
+    }
+
+    $filename = time() . '_' . basename($_FILES['image']['name']);
+    $targetFile = $uploadDir . $filename;
+
+    if (move_uploaded_file($_FILES['image']['tmp_name'], $targetFile)) {
+        $imagePath = 'uploads/vehicles/' . $filename;
+    } else {
+        $errors[] = "Erreur lors de l'upload de l'image.";
+    }
+}
     if (empty($errors)) {
         $vehicle = new Vehicle();
         if ($vehicle->insert(
             $data['marque'], $data['model'], $data['description'], $data['nom'],
-            $data['prix'], $data['disponibilite'], $data['Id_categories']
+            $data['prix'], $data['disponibilite'], $data['Id_categories'], $imagePath
         )) {
             $_SESSION['flash'] = ['type' => 'success', 'msg' => 'Véhicule ajouté avec succès.'];
             header('Location: /dashboard/vehicle/list');
