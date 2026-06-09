@@ -6,7 +6,7 @@ $category = new Category();
 $row      = $category->findById($id);
 
 if (!$id || !$row) {
-    header('Location: /dashboard/categories/list');
+    header('Location: /controllers/dashboard/categories/listController.php');
     exit;
 }
 
@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         if ($category->update($id, $nom)) {
             $_SESSION['flash'] = ['type' => 'success', 'msg' => 'Catégorie mise à jour.'];
-            header('Location: /dashboard/categories/list');
+            header('Location: /controllers/dashboard/categories/listController.php');
             exit;
         }
         $errors[] = 'Erreur lors de la mise à jour.';

@@ -2,7 +2,7 @@
 
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h1 class="h3 mb-0">Modifier la catégorie</h1>
-    <a href="/dashboard/categories/list" class="btn btn-outline-secondary">
+    <a href="/controllers/dashboard/categories/listController.php" class="btn btn-outline-secondary">
         <i class="bi bi-arrow-left"></i> Retour
     </a>
 </div>
@@ -35,7 +35,7 @@
                 <button type="submit" class="btn btn-warning">
                     <i class="bi bi-pencil"></i> Enregistrer
                 </button>
-                <a href="/dashboard/categories/list" class="btn btn-outline-secondary">
+                <a href="/controllers/dashboard/categories/list" class="btn btn-outline-secondary">
                     Annuler
                 </a>
             </div>

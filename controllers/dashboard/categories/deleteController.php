@@ -6,5 +6,5 @@ if ($id > 0) {
     (new Category())->delete($id);
     $_SESSION['flash'] = ['type' => 'warning', 'msg' => 'Catégorie supprimée.'];
 }
-header('Location: /dashboard/categories/list');
+header('Location: /controllers/dashboard/categories/listController.php');
 exit;

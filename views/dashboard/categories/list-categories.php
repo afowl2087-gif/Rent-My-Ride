@@ -33,11 +33,11 @@
                     <td><?= $cat['Id_categories'] ?></td>
                     <td><?= htmlspecialchars($cat['nom_categorie']) ?></td>
                     <td class="text-end">
-                        <a href="/dashboard/categories/update?id=<?= $cat['Id_categories'] ?>"
+                        <a href="/controllers/dashboard/categories/updateController.php"
                            class="btn btn-sm btn-warning">
                             <i class="bi bi-pencil"></i> Modifier
                         </a>
-                        <a href="/dashboard/categories/delete?id=<?= $cat['Id_categories'] ?>"
+                        <a href="/controllers/dashboard/categories/deleteController.php"
                            class="btn btn-sm btn-danger"
                            onclick="return confirm('Supprimer cette catégorie ?')">
                             <i class="bi bi-trash"></i> Supprimer

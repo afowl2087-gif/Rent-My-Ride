@@ -7,7 +7,7 @@ $vehicle = new Vehicle();
 $data    = $vehicle->findById($id);
 
 if (!$id || !$data) {
-    header('Location: /dashboard/vehicle/list');
+    header('Location: /controllers/dashboard/vehicle/list');
     exit;
 }
 

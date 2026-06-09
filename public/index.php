@@ -10,7 +10,6 @@ if (php_sapi_name() === 'cli-server') {
 }
 
 define('ROOT', dirname(__DIR__));
-
 require_once __DIR__ . '/../config/database.php';
 
 // Singleton PDO accessible partout via getDB()

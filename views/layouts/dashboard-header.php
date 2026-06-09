@@ -30,12 +30,12 @@
             <span class="nav-section">Catalogue</span>
             <ul class="nav flex-column mb-2">
                 <li class="nav-item">
-                    <a class="nav-link px-2 py-2" href="/dashboard/categories/list">
+                    <a class="nav-link px-2 py-2" href="/controllers/dashboard/categories/listController.php">
                         <i class="bi bi-tags me-2"></i> Catégories
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link px-2 py-2" href="/dashboard/vehicle/list">
+                    <a class="nav-link px-2 py-2" href="/controllers/dashboard/vehicle/listController.php">
                         <i class="bi bi-car-front me-2"></i> Véhicules
                     </a>
                 </li>
@@ -44,12 +44,12 @@
             <span class="nav-section">Gestion</span>
             <ul class="nav flex-column mb-2">
                 <li class="nav-item">
-                    <a class="nav-link px-2 py-2" href="/dashboard/reservation/list">
+                    <a class="nav-link px-2 py-2" href="/controllers/dashboard/reservation/listController.php">
                         <i class="bi bi-calendar-check me-2"></i> Réservations
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link px-2 py-2" href="/dashboard/users/list">
+                    <a class="nav-link px-2 py-2" href="/controllers/dashboard/users/listController.php">
                         <i class="bi bi-people me-2"></i> Utilisateurs
                     </a>
                 </li>
