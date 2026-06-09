@@ -78,18 +78,10 @@
                         <?= number_format((float)$v['prix'], 2, ',', ' ') ?> €
                         <small class="text-muted fw-normal fs-6">/jour</small>
                     </span>
-                    <button
-    type="button"
-    class="btn btn-primary"
-    data-bs-toggle="modal"
-    data-bs-target="#reservationModal"
-    data-id="<?= $v['Id_vehicules'] ?>"
-    data-marque="<?= htmlspecialchars($v['marque']) ?>"
-    data-model="<?= htmlspecialchars($v['model']) ?>"
-    data-prix="<?= $v['prix'] ?>"
->
+                    <a href="/vehicle/detail?id=<?= $v['Id_vehicules'] ?>" class="btn btn-primary">
     Voir
-</button>
+</a>
+   
                 </div>
             </div>
         </div>

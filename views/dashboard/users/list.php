@@ -2,9 +2,14 @@
 
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h1 class="h3 mb-0">Utilisateurs</h1>
+    <div>
+    <a href="/dashboard/users/archived" class="btn btn-secondary">
+            <i class="bi bi-archive"></i> Utilisateurs archivés
+        </a>
     <a href="/dashboard/users/add" class="btn btn-primary">
         <i class="bi bi-plus-lg"></i> Ajouter
     </a>
+    </div>
 </div>
 
 <?php if (isset($_SESSION['flash'])): ?>
@@ -45,16 +50,30 @@
                         <?php endif; ?>
                     </td>
                     <td class="text-end">
-                        <a href="/dashboard/users/update?id=<?= $u['Id_users'] ?>"
-                           class="btn btn-sm btn-warning">
-                            <i class="bi bi-pencil"></i> Modifier
-                        </a>
-                        <a href="/dashboard/users/delete?id=<?= $u['Id_users'] ?>"
-                           class="btn btn-sm btn-danger"
-                           onclick="return confirm('Supprimer cet utilisateur ?')">
-                            <i class="bi bi-trash"></i> Supprimer
-                        </a>
-                    </td>
+
+    <a href="/dashboard/users/update?id=<?= $u['Id_users'] ?>"
+       class="btn btn-sm btn-warning">
+        <i class="bi bi-pencil"></i> Modifier
+    </a>
+
+    <?php if (empty($u['is_archived']) || $u['is_archived'] == 0): ?>
+
+        <a href="/dashboard/users/archive?id=<?= $u['Id_users'] ?>"
+   class="btn btn-sm btn-danger"
+   onclick="return confirm('Archiver cet utilisateur ?')">
+    <i class="bi bi-archive"></i> Archiver
+        </a>
+
+    <?php else: ?>
+
+        <a href="/dashboard/users/restore?id=<?= $u['Id_users'] ?>"
+           class="btn btn-sm btn-success">
+            <i class="bi bi-arrow-counterclockwise"></i> Restaurer
+        </a>
+
+    <?php endif; ?>
+
+</td>
                 </tr>
                 <?php endforeach; ?>
             </tbody>

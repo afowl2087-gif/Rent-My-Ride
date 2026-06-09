@@ -22,11 +22,13 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/"><i class="bi bi-house"></i> Accueil</a>
                 </li>
+                <?php if (!empty($_SESSION['admin'])): ?>
                 <li class="nav-item">
                     <a class="nav-link" href="/dashboard/categories/list">
                         <i class="bi bi-speedometer2"></i> Dashboard
                     </a>
                 </li>
+                <?php endif; ?>
             </ul>
         </div>
     </div>

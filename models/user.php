@@ -8,17 +8,33 @@ class User
 
     public function __construct()
     {
-        $db = new Database();
-        $this->pdo = $db->getConnection();
+        $this->pdo = getDB();
     }
 
     // GET ALL
-    public function getAll()
-    {
-        $stmt = $this->pdo->query("SELECT * FROM users ORDER BY nom, prenom");
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
+   public function getAll()
+{
+    $stmt = $this->pdo->query("
+        SELECT * 
+        FROM users 
+        WHERE is_archived = 0
+        ORDER BY nom, prenom
+    ");
 
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+    public function findByEmail($email)
+{
+    $stmt = $this->pdo->prepare(
+        "SELECT * FROM users WHERE email = :email LIMIT 1"
+    );
+
+    $stmt->execute([
+        'email' => $email
+    ]);
+
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}
     // FIND BY ID
     public function findById($id)
     {
@@ -77,10 +93,38 @@ class User
         ]);
     }
 
-    // DELETE
-    public function delete($id)
-    {
-        $stmt = $this->pdo->prepare("DELETE FROM users WHERE Id_users = :id");
-        return $stmt->execute(['id' => $id]);
-    }
+    // ARCHIVE
+    public function archive($id)
+{
+    $stmt = $this->pdo->prepare("
+        UPDATE users
+        SET is_archived = 1
+        WHERE Id_users = :id
+    ");
+
+    return $stmt->execute(['id' => $id]);
+}
+
+public function getArchived()
+{
+    $stmt = $this->pdo->query("
+        SELECT * 
+        FROM users 
+        WHERE is_archived = 1 
+        ORDER BY nom, prenom
+    ");
+
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+    public function restore($id)
+{
+    $stmt = $this->pdo->prepare("
+        UPDATE users
+        SET is_archived = 0
+        WHERE Id_users = :id
+    ");
+
+    return $stmt->execute(['id' => $id]);
+}
 }

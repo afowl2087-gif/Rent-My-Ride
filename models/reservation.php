@@ -8,8 +8,7 @@ class Reservation
 
     public function __construct()
     {
-        $db = new Database();
-        $this->pdo = $db->getConnection();
+        $this->pdo = getDB();
     }
 
     // GET ALL (dashboard — toutes les réservations)
@@ -20,9 +19,10 @@ class Reservation
                     v.marque, v.model, v.nom AS nom_vehicule, v.prix,
                     u.nom, u.prenom, u.email, u.telephone
              FROM reservations r
-             JOIN vehicules v ON v.Id_vehicules = r.Id_vehicules
-             JOIN users     u ON u.Id_users     = r.Id_users
-             ORDER BY r.date_debut DESC"
+                JOIN vehicules v ON v.Id_vehicules = r.Id_vehicules
+                JOIN users     u ON u.Id_users     = r.Id_users
+                WHERE r.is_archived = 0
+                ORDER BY r.date_debut DESC"
         );
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -83,7 +83,31 @@ class Reservation
         );
         return $stmt->execute(['statut' => $statut, 'id' => $id]);
     }
+    public function archiveByUser($userId)
+    {
+        $stmt = $this->pdo->prepare("
+            UPDATE reservations
+            SET is_archived = 1
+            WHERE Id_users = :id
+    ");
 
+    return $stmt->execute([
+        'id' => $userId
+    ]);
+    }
+
+    public function restoreByUser($userId)
+{
+    $stmt = $this->pdo->prepare("
+        UPDATE reservations
+        SET is_archived = 0
+        WHERE Id_users = :id
+    ");
+
+    return $stmt->execute([
+        'id' => $userId
+    ]);
+}
     // DELETE
     public function delete($id)
     {

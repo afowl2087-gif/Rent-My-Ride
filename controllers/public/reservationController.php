@@ -1,9 +1,10 @@
 <?php
+
 require_once ROOT . '/models/vehicle.php';
 require_once ROOT . '/models/user.php';
 require_once ROOT . '/models/reservation.php';
 
-$id      = (int) ($_GET['id'] ?? 0);
+$id = (int) ($_GET['id'] ?? ($_POST['Id_vehicules'] ?? 0));
 $vehicle = (new Vehicle())->findById($id);
 
 if (!$id || !$vehicle || !$vehicle['disponibilite']) {
@@ -39,12 +40,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if (empty($errors)) {
             // Transaction manuelle : insérer le client PUIS la réservation
-            $db  = new Database();
-            $pdo = $db->getConnection();
+            $pdo = getDB();
 
             try {
                 $pdo->beginTransaction();
-
                 $user   = new User();
                 $userId = $user->insert(
                     $data['nom'], $data['prenom'],
@@ -61,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $data['date_debut'], $data['date_fin'],
                     'en attente', $id, $userId
                 );
-
+            
                 if (!$ok) throw new Exception("Erreur création réservation.");
 
                 $pdo->commit();

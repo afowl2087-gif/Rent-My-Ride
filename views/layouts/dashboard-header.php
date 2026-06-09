@@ -64,3 +64,7 @@
 
         <!-- Contenu principal -->
         <main class="col-md-9 col-lg-10 py-4 px-4">
+
+        <a href="/logout" class="btn btn-danger">
+    Déconnexion
+</a>

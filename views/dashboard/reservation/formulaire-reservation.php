@@ -26,8 +26,8 @@
 
     <div class="card shadow-sm">
         <div class="card-body">
-            <form method="POST" action="">
-
+            <form method="POST" action="/reservation?id=<?= $vehicle['Id_vehicules'] ?>">
+                <input type="hidden" name="Id_vehicules" value="<?= $vehicle['Id_vehicules'] ?>">
                 <h5 class="mb-3">Vos coordonnées</h5>
                 <div class="row g-3 mb-4">
                     <div class="col-md-6">

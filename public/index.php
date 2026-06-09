@@ -33,6 +33,11 @@ if (empty($segments)) {
     require ROOT . '/controllers/public/homeController.php';
 
 } elseif ($segments[0] === 'dashboard') {
+     if (!isset($_SESSION['admin'])) {
+        header('Location: /login');
+        exit;
+    }
+    
     $section = $segments[1] ?? 'categories';
     $action  = $segments[2] ?? 'list';
     $ctrl    = ROOT . "/controllers/dashboard/{$section}/{$action}Controller.php";
@@ -52,6 +57,9 @@ if (empty($segments)) {
         http_response_code(404);
         echo '<h1>404 – Page introuvable</h1>';
     }
+
+} elseif ($segments[0] === 'reservation') {
+    require ROOT . '/controllers/public/reservationController.php';
 
 } else {
     $ctrl = ROOT . "/controllers/public/{$segments[0]}Controller.php";
