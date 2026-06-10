@@ -1,8 +1,8 @@
 <?php require __DIR__ . '/../../../views/layouts/dashboard-header.php'; ?>
 
 <div class="d-flex justify-content-between align-items-center mb-4">
-    <h1 class="h3 mb-0">Catégories</h1>
-    <a href="/controllers/dashboard/categories/addController.php" class="btn btn-primary">
+    <h1 class="h3 mb-0">Utilisateurs</h1>
+    <a href="/controllers/dashboard/users/addController.php" class="btn btn-primary">
         <i class="bi bi-plus-lg"></i> Ajouter
     </a>
 </div>
@@ -15,8 +15,8 @@
     <?php unset($_SESSION['flash']); ?>
 <?php endif; ?>
 
-<?php if (empty($categories)): ?>
-    <p class="text-muted">Aucune catégorie enregistrée.</p>
+<?php if (empty($users)): ?>
+    <p class="text-muted">Aucun utilisateur enregistré.</p>
 <?php else: ?>
     <div class="table-responsive">
         <table class="table table-striped table-hover align-middle">
@@ -24,22 +24,34 @@
                 <tr>
                     <th>#</th>
                     <th>Nom</th>
+                    <th>E-mail</th>
+                    <th>Téléphone</th>
+                    <th>Rôle</th>
                     <th class="text-end">Actions</th>
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($categories as $cat): ?>
+                <?php foreach ($users as $u): ?>
                 <tr>
-                    <td><?= $cat['Id_categories'] ?></td>
-                    <td><?= htmlspecialchars($cat['nom_categorie']) ?></td>
+                    <td><?= $u['Id_users'] ?></td>
+                    <td><?= htmlspecialchars($u['prenom'] . ' ' . $u['nom']) ?></td>
+                    <td><?= htmlspecialchars($u['email']) ?></td>
+                    <td><?= htmlspecialchars($u['telephone']) ?></td>
+                    <td>
+                        <?php if ($u['role'] == 1): ?>
+                            <span class="badge bg-danger">Admin</span>
+                        <?php else: ?>
+                            <span class="badge bg-secondary">Client</span>
+                        <?php endif; ?>
+                    </td>
                     <td class="text-end">
-                        <a href="/controllers/dashboard/categories/updateController.php?id=<?= $cat['Id_categories'] ?>"
+                        <a href="/controllers/dashboard/users/updateController.php?id=<?= $u['Id_users'] ?>"
                            class="btn btn-sm btn-warning">
                             <i class="bi bi-pencil"></i> Modifier
                         </a>
-                        <a href="/controllers/dashboard/categories/deleteController.php?id=<?= $cat['Id_categories'] ?>"
+                        <a href="/controllers/dashboard/users/deleteController.php?id=<?= $u['Id_users'] ?>"
                            class="btn btn-sm btn-danger"
-                           onclick="return confirm('Supprimer cette catégorie ?')">
+                           onclick="return confirm('Supprimer cet utilisateur ?')">
                             <i class="bi bi-trash"></i> Supprimer
                         </a>
                     </td>
