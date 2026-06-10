@@ -1,8 +1,10 @@
 <?php
 require_once __DIR__ . '/../../../bootstrap.php';
+requireAdmin();
 require_once __DIR__ . '/../../../models/reservation.php';
 require_once __DIR__ . '/../../../models/vehicle.php';
 require_once __DIR__ . '/../../../models/user.php';
+
 
 $vehicles = (new Vehicle())->getAll();
 $users    = (new User())->getAll();

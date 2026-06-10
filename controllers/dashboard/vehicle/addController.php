@@ -1,7 +1,9 @@
 <?php
 require_once __DIR__ . '/../../../bootstrap.php';
+requireAdmin();
 require_once __DIR__ . '/../../../models/vehicle.php';
 require_once __DIR__ . '/../../../models/category.php';
+
 
 $categories = (new Category())->getAll();
 $errors     = [];

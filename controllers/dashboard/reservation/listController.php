@@ -1,6 +1,8 @@
 <?php
 require_once __DIR__ . '/../../../bootstrap.php';
+requireAdmin();
 require_once __DIR__ . '/../../../models/reservation.php';
+
 
 $reservation = new Reservation();
 

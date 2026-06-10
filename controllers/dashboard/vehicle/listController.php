@@ -1,6 +1,8 @@
 <?php
 require_once __DIR__ . '/../../../bootstrap.php';
+requireAdmin();
 require_once __DIR__ . '/../../../models/vehicle.php';
+
 
 $vehicles  = (new Vehicle())->getAll();
 $pageTitle = 'Véhicules';

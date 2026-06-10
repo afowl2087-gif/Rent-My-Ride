@@ -14,3 +14,9 @@ function getDB(): PDO {
     }
     return $pdo;
 }
+function requireAdmin(): void {
+    if (empty($_SESSION['is_admin'])) {
+        header('Location: /controllers/public/adminLoginController.php');
+        exit;
+    }
+}
