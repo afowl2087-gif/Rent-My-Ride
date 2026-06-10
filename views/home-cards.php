@@ -31,7 +31,7 @@
     <a href="/?<?= $search ? 'q='.urlencode($search) : '' ?>"
        class="btn btn-sm <?= !$categoryId ? 'btn-danger' : 'btn-outline-secondary' ?> rounded-pill">Tous</a>
     <?php foreach ($categories as $cat): ?>
-    <a href="/?cat=<?= $cat['Id_categories'] ?><?= $search ? '&q='.urlencode($search) : '' ?>"
+    <a href="/controllers/public/homeController.php?cat=<?= $cat['Id_categories'] ?><?= $search ? '&q='.urlencode($search) : '' ?>"
        class="btn btn-sm <?= (int)$categoryId === (int)$cat['Id_categories'] ? 'btn-danger' : 'btn-outline-secondary' ?> rounded-pill">
         <?= htmlspecialchars($cat['nom_categorie']) ?>
     </a>
