@@ -49,10 +49,10 @@
                            class="btn btn-sm btn-warning">
                             <i class="bi bi-pencil"></i> Modifier
                         </a>
-                        <a href="/controllers/dashboard/users/deleteController.php?id=<?= $u['Id_users'] ?>"
+                        <a href="/controllers/dashboard/users/archiveController.php?id=<?= $u['Id_users'] ?>"
                            class="btn btn-sm btn-danger"
-                           onclick="return confirm('Supprimer cet utilisateur ?')">
-                            <i class="bi bi-trash"></i> Supprimer
+                           onclick="return confirm('Archiver cet utilisateur ?')">
+                            <i class="bi bi-trash"></i> Archiver
                         </a>
                     </td>
                 </tr>

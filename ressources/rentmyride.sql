@@ -88,3 +88,41 @@ INSERT INTO reservations (date_debut, date_fin, statut, Id_vehicules, Id_users) 
 ('2025-07-03', '2025-07-10', 'en attente', 8, 3),
 ('2025-07-05', '2025-07-12', 'confirmée', 9, 4),
 ('2025-07-08', '2025-07-15', 'confirmée', 10, 5);
+
+CREATE TABLE categories_archives (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_origine INT NOT NULL,
+    nom_categorie VARCHAR(255) NOT NULL,
+    archive_le DATETIME DEFAULT NOW()
+);
+
+CREATE TABLE users_archives (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_origine INT NOT NULL,
+    nom VARCHAR(100),
+    prenom VARCHAR(100),
+    email VARCHAR(255),
+    telephone VARCHAR(20),
+    role INT,
+    archive_le DATETIME DEFAULT NOW()
+);
+ALTER TABLE reservations MODIFY Id_users INT NULL;
+ALTER TABLE vehicules MODIFY Id_categories INT NULL;
+
+CREATE TABLE categories_archives (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_origine INT NOT NULL,
+    nom_categorie VARCHAR(255) NOT NULL,
+    archive_le DATETIME DEFAULT NOW()
+);
+
+CREATE TABLE users_archives (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_origine INT NOT NULL,
+    nom VARCHAR(100),
+    prenom VARCHAR(100),
+    email VARCHAR(255),
+    telephone VARCHAR(20),
+    role INT,
+    archive_le DATETIME DEFAULT NOW()
+);

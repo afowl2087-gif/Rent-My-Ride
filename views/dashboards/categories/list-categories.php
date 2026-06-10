@@ -37,10 +37,10 @@
                            class="btn btn-sm btn-warning">
                             <i class="bi bi-pencil"></i> Modifier
                         </a>
-                        <a href="/controllers/dashboard/categories/deleteController.php?id=<?= $cat['Id_categories'] ?>"
+                        <a href="/controllers/dashboard/categories/archiveController.php?id=<?= $cat['Id_categories'] ?>"
                            class="btn btn-sm btn-danger"
-                           onclick="return confirm('Supprimer cette catégorie ?')">
-                            <i class="bi bi-trash"></i> Supprimer
+                           onclick="return confirm('Archiver cette catégorie ?')">
+                            <i class="bi bi-trash"></i> Archiver
                         </a>
                     </td>
                 </tr>
